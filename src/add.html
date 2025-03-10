@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alta Artículo Deportivo</title>
+</head>
+<body>
+<div>
+    <header>
+        <h1>Gestión de Artículos Deportivos</h1>
+    </header>
+    <main>              
+    <ul>
+        <li><a href="index.php">Inicio</a></li>
+        <li><a href="add.html">Alta</a></li>
+    </ul>
+    <h2>Alta de Artículo Deportivo</h2>
+
+    <form action="add_action.php" method="post">
+        <div>
+            <label for="apellido_autor">Apellido del Autor</label>
+            <input type="text" name="apellido_autor" id="apellido_autor" placeholder="Apellido del autor" required>
+        </div>
+
+        <div>
+            <label for="nombre_autor">Nombre del Autor</label>
+            <input type="text" name="nombre_autor" id="nombre_autor" placeholder="Nombre del autor" required>
+        </div>
+
+        <div>
+            <label for="deporte">Deporte</label>
+            <select name="deporte" id="deporte" required>
+                <option value="" disabled selected>Seleccione un deporte</option>
+                <option value="fútbol">Fútbol</option>
+                <option value="waterpolo">Waterpolo</option>
+                <option value="baloncesto">Baloncesto</option>
+                <option value="atletismo">Atletismo</option>
+                <option value="rugby">Rugby</option>
+            </select>  
+        </div>
+
+        <div>
+            <label for="fecha_publicacion">Fecha de Publicación</label>
+            <input type="date" name="fecha_publicacion" id="fecha_publicacion" required>
+        </div>
+
+        <div>
+            <input type="submit" name="inserta" value="Agregar">
+            <input type="button" value="Cancelar" onclick="location.href='index.php'">
+        </div>
+    </form>
+    
+    </main>  
+    <footer>
+        Creado por Magazine Sports &copy; 2025
+    </footer>
+</div>
+</body>
+</html>
