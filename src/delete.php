@@ -37,10 +37,6 @@ $result = $mysqli->query("DELETE FROM articulos WHERE articulo_id = $articulo_id
 
 //Se cierra la conexión de base de datos previamente abierta
 $mysqli->close();
-echo "<div>Registro borrado correctamente...</div>";
-echo "<a href='index.php'>Ver resultado</a>";
-//Se redirige a la página principal: index.php
-//header("Location:index.php");
 ?>
 
     <div>Artículo eliminado correctamente</div>
