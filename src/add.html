@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alta artículo</title>
+</head>
+<body>
+<div>
+	<header>
+		<h1>Sport Magazines</h1>
+	</header>
+	<main>				
+	<ul>
+		<li><a href="index.php">Inicio</a></li>
+		<li><a href="add.html">Alta</a></li>
+	</ul>
+	<h2>Alta artículo</h2>
+<!--FORMULARIO DE ALTA. Al hacer click en el botón Insertar, llama a la página: add.php (form action="add.php")
+La página: add.php se encargará de proceder a la inserción del registro en la tabla de empleados
+-->
+
+	<form action="add.php" method="post">
+		<div>
+			<label for="nombre_autor">nombre_autor</label>
+			<input type="text" name="nombre_autor" id="nombre_autor" placeholder="nombre_autor" required>
+		</div>
+
+		<div>
+			<label for="apellido_autor">apellido_autor</label>
+			<input type="text" name="apellido_autor" id="apellido_autor" placeholder="apellido_autor" required>
+		</div>
+
+		<div>
+			<label for="deporte">deporte</label>
+			<input type="text" name="deporte" id="deporte" placeholder="deporte" required>
+		</div>
+
+		<div>
+			<label for="fecha_publicacion">fecha_publicacion</label>
+			<input type="date" name="fecha_publicacion" id="fecha_publicacion" placeholder="fecha_publicacion" required>
+		</div>
+
+		<div>
+			<input type="submit" name="inserta" value="Agregar">
+			<input type="button" value="Cancelar" onclick="location.href='index.php'">
+		</div>
+	</form>
+	
+	</main>	
+	<footer>
+	Created by the IES Miguel Herrero team &copy; 2025
+  	</footer>
+</div>
+</body>
+</html>
