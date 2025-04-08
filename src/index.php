@@ -11,44 +11,45 @@ include_once("config.php");
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<title>Sport Magazines</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sport Magazines</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<div>
-	<header>
-		<h1>Sport Magazines</h1>
-	</header>
+<body class="container py-4">
+<div class="card p-4 shadow-sm">
+    <header class="text-center mb-4">
+        <h1 class="text-primary">Sport Magazines</h1>
+    </header>
 
-	<main>
-	<ul>
-		<li><a href="index.php">Inicio</a></li>
-		<li><a href="add.html">Alta</a></li>
-	</ul>
-	<h2>Articulos</h2>
-	<table border="1">
-	<thead>
-		<tr>
-			<th>Nombre_autor</th>
-			<th>Apellido_autor</th>
-			<th>Deporte</th>
-			<th>Fecha_publicacion</th>
-			<th>Acciones</th>
-		</tr>
-	</thead>
-	<tbdody>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.php">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="add.html">Alta</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<?php
+    <main>
+        <h2 class="mb-3">Artículos</h2>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre Autor</th>
+                    <th>Apellido Autor</th>
+                    <th>Deporte</th>
+                    <th>Fecha Publicación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
 /*Se realiza una consulta de selección la tabla empleados ordenados y almacena todos los registros en una estructura especial PARECIDA a una "tabla" llamada $resultado.
-Cada fila y cada columna de la tabla se corresponde con un registro y campo de la tabla EMPLEADOS.
-*/
-
-$resultado = $mysqli->query("SELECT * FROM articulos ORDER BY fecha_publicacion");
-
-//Cierra la conexión de la BD
-$mysqli->close();
-
+Cada fila y cada columna de la tabla se corresponde con un registro y campo de la tabla EMPLEADOS.*/
+                $resultado = $mysqli->query("SELECT * FROM articulos ORDER BY fecha_publicacion");
+                //Cierra la conexión de la BD
+				$mysqli->close();
 /*
 A continuación indicamos distintos manera de leer cada fila de la tabla anterior: 
 mysqli_fetch_array()- Almacena una fila de la tabla anterior, $resultado, en un array asociativo, numérico o ambos
@@ -78,36 +79,37 @@ $fila["fecha_publicacion"] -> Contiene el el contenido del campo fecha_publicaci
 */
 
 //Comprobamos si el nº de fila/registros es mayor que 0
- if ($resultado->num_rows > 0) {
-
+                if ($resultado->num_rows > 0) {
 /* A través de la estructura repetitiva "while" se recorre la "tabla" $resultados almacenando cada línea/registro en el array asociativo $fila. 
 Recuerda que $fila contiene el contenido de todos los campos del registro actual tal como explicamos anteriormente.
 El bucle finaliza cuando se llegue a la última línea (o registro) de la tabla $resultado. 
 A medida que avanza se va consturyendo cada fila de la tabla HTML con todos los campos del empleado, hasta completar todos los registros*/
-
-	while($fila = $resultado->fetch_array()) {
-		echo "<tr>\n";
-		echo "<td>".$fila['nombre_autor']."</td>\n";
-		echo "<td>".$fila['apellido_autor']."</td>\n";
-		echo "<td>".$fila['deporte']."</td>\n";
-		echo "<td>".$fila['fecha_publicacion']."</td>\n";
-		echo "<td>";
+                    while ($fila = $resultado->fetch_array()) {
+                        echo "<tr>";
+                        echo "<td>" . htmlspecialchars($fila['nombre_autor']) . "</td>";
+                        echo "<td>" . htmlspecialchars($fila['apellido_autor']) . "</td>";
+                        echo "<td>" . htmlspecialchars($fila['deporte']) . "</td>";
+                        echo "<td>" . htmlspecialchars($fila['fecha_publicacion']) . "</td>";
+                        echo "<td>";
 /* En la última columna se añade dos enlaces para editar y modificar el registro correspondiente. 
 Los datos se pueden enviar entre distintas páginas siguiendo distintos métodos. En este caso el articulo_id del registro a editar/eliminar se pasa a través de la URL. 
 Este forma de pasar el dato se conoce como: método GET*/
-		echo "<a href=\"edit.php?id=$fila[articulo_id]\">Edición</a>\n";
-		echo "<a href=\"delete.php?id=$fila[articulo_id]\" onClick=\"return confirm('¿Está seguro que desea eliminar el artículo?')\" >Baja</a></td>\n";
-		echo "</td>";
-		echo "</tr>\n";
-	}//fin mientras
- }//fin si
-?>
-	</tbdody>
-	</table>
-	</main>
-	<footer>
-    	Created by the IES Miguel Herrero team &copy; 2025
-  	</footer>
+                        echo "<a class='btn btn-warning btn-sm' href='edit.php?id=" . $fila['articulo_id'] . "'>Editar</a> ";
+                        echo "<a class='btn btn-danger btn-sm' href='delete.php?id=" . $fila['articulo_id'] . "' onClick='return confirm(\"¿Está seguro que desea eliminar el artículo?\")'>Eliminar</a>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }//fin mientras
+                }//fin si
+                ?>
+            </tbody>
+        </table>
+    </main>
+
+    <footer class="text-center mt-4">
+        <p class="text-muted">Created by the IES Miguel Herrero team &copy; 2025</p>
+    </footer>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
