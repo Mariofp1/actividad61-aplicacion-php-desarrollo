@@ -27,6 +27,7 @@ Los datos del formulario se acceden por el método: POST
             $apellido_autor = $mysqli->real_escape_string($_POST['apellido_autor']);
             $nombre_autor = $mysqli->real_escape_string($_POST['nombre_autor']);
             $deporte = $mysqli->real_escape_string($_POST['deporte']);
+            $antiguedad = $mysqli->real_escape_string($_POST['antiguedad']);
             $fecha_publicacion = $mysqli->real_escape_string($_POST['fecha_publicacion']);
 /*Con mysqli_real_scape_string protege caracteres especiales en una cadena para ser usada en una sentencia SQL.
 Esta función es usada para crear una cadena SQL legal que se puede usar en una sentencia SQL. 
@@ -36,7 +37,7 @@ Escapado con mysqli_real_escape_string(): Se convierte en "O\'Reilly", evitando 
 */
 
 //Se comprueba si existen campos del formulario vacíos
-            if(empty($apellido_autor) || empty($nombre_autor) || empty($deporte) || empty($fecha_publicacion)) 
+            if(empty($apellido_autor) || empty($nombre_autor) || empty($deporte) || empty($antiguedad) || empty($fecha_publicacion)) 
             {
                 if(empty($apellido_autor)) 
                 {
@@ -50,6 +51,10 @@ Escapado con mysqli_real_escape_string(): Se convierte en "O\'Reilly", evitando 
                 {
                     echo "<div class='alert alert-danger' role='alert'>Por favor, complete el campo deporte.</div>";
                 }
+                if(empty($antiguedad)) 
+                {
+                    echo "<div class='alert alert-danger' role='alert'>Por favor, complete el campo antiguedad.</div>";
+                }
                 if(empty($fecha_publicacion)) 
                 {
                     echo "<div class='alert alert-danger' role='alert'>Por favor, complete el campo fecha publicación.</div>";
@@ -61,7 +66,7 @@ Escapado con mysqli_real_escape_string(): Se convierte en "O\'Reilly", evitando 
         }//fin si     
         else {//Sino existen campos de formulario vacíos se procede al alta del nuevo registro
 //Se ejecuta una sentencia SQL. Inserta (da de alta) el nuevo registro: insert.
-            $result = $mysqli->query("INSERT INTO articulos (apellido_autor, nombre_autor, deporte, fecha_publicacion) VALUES ('$apellido_autor', '$nombre_autor', '$deporte', '$fecha_publicacion')");
+            $result = $mysqli->query("INSERT INTO articulos (apellido_autor, nombre_autor, deporte, antiguedad, fecha_publicacion) VALUES ('$apellido_autor', '$nombre_autor', '$deporte', '$antiguedad', '$fecha_publicacion')");
             $mysqli->close();
             echo "<div class='alert alert-success' role='alert'>Artículo añadido correctamente.</div>";
             echo "<a href='index.php' class='btn btn-primary mt-3'>Ver resultado</a>";

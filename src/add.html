@@ -33,7 +33,21 @@ La página: add.php se encargará de proceder a la inserción del registro en la
 
 		<div class="col-md-6">
 			<label for="deporte" class="form-label">Deporte</label>
-			<input type="text" name="deporte" id="deporte" class="form-control" placeholder="Deporte" required>
+			<select name="deporte" id="deporte" class="form-control" placeholder="Deporte" required>
+				<option value="" disabled selected>Seleccione un deporte</option>
+				<option value="Fútbol">Fútbol</option>
+				<option value="Baloncesto">Baloncesto</option>
+				<option value="Petanca">Petanca</option>
+				<option value="Ciclismo">Ciclismo</option>
+				<option value="Rugby">Rugby</option>
+				<option value="Atletismo">Atletismo</option>
+				<option value="Waterpolo">Waterpolo</option>
+			</select>
+		</div>
+
+		<div class="col-md-6">
+			<label for="antiguedad" class="form-label">Antiguedad</label>
+			<input type="number" name="antiguedad" id="antiguedad" class="form-control" placeholder="Antiguedad" required>
 		</div>
 
 		<div class="col-md-6">

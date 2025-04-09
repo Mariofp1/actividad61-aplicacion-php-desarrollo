@@ -39,6 +39,7 @@ include_once("config.php");
                     <th>Nombre Autor</th>
                     <th>Apellido Autor</th>
                     <th>Deporte</th>
+                    <th>Antiguedad</th>
                     <th>Fecha Publicación</th>
                     <th>Acciones</th>
                 </tr>
@@ -86,10 +87,11 @@ El bucle finaliza cuando se llegue a la última línea (o registro) de la tabla 
 A medida que avanza se va consturyendo cada fila de la tabla HTML con todos los campos del empleado, hasta completar todos los registros*/
                     while ($fila = $resultado->fetch_array()) {
                         echo "<tr>";
-                        echo "<td>" . htmlspecialchars($fila['nombre_autor']) . "</td>";
-                        echo "<td>" . htmlspecialchars($fila['apellido_autor']) . "</td>";
-                        echo "<td>" . htmlspecialchars($fila['deporte']) . "</td>";
-                        echo "<td>" . htmlspecialchars($fila['fecha_publicacion']) . "</td>";
+                        echo "<td>" . $fila['nombre_autor'] . "</td>";
+                        echo "<td>" . $fila['apellido_autor'] . "</td>";
+                        echo "<td>" . $fila['deporte'] . "</td>";
+                        echo "<td>" . $fila['antiguedad'] . "</td>";
+                        echo "<td>" . $fila['fecha_publicacion'] . "</td>";
                         echo "<td>";
 /* En la última columna se añade dos enlaces para editar y modificar el registro correspondiente. 
 Los datos se pueden enviar entre distintas páginas siguiendo distintos métodos. En este caso el articulo_id del registro a editar/eliminar se pasa a través de la URL. 

@@ -1,4 +1,5 @@
 <?php
+//Incluye fichero con parámetros de conexión a la base de datos
 include_once("config.php");
 ?>
 
@@ -29,31 +30,56 @@ include_once("config.php");
         <h2 class="mb-3">Modificación Artículo</h2>
 
         <?php
+/*Obtiene el id del registro del empleado a modificar, idempleado, a partir de su URL. Este tipo de datos se accede utilizando el método: GET*/
+
+//Recoge el id del empleado a modificar a través de la clave idempleado del array asociativo $_GET y lo almacena en la variable idempleado
         $articulo_id = $mysqli->real_escape_string($_GET['id']);
-        $resultado = $mysqli->query("SELECT apellido_autor, nombre_autor, deporte, fecha_publicacion FROM articulos WHERE articulo_id = $articulo_id");
+//Con mysqli_real_scape_string protege caracteres especiales en una cadena para ser usada en una sentencia SQL.
+        $articulo_id = $mysqli->real_escape_string($articulo_id);
+//Se selecciona el registro a modificar: select
+        $resultado = $mysqli->query("SELECT apellido_autor, nombre_autor, deporte, antiguedad, fecha_publicacion FROM articulos WHERE articulo_id = $articulo_id");
+//Se extrae el registro y lo guarda en el array $fila
+//Nota: También se puede utilizar el método fetch_assoc de la siguiente manera: $fila = $resultado->fetch_assoc();
         $fila = $resultado->fetch_array();
+//Se cierra la conexión de base de datos
         $mysqli->close();
         ?>
-
+<!--FORMULARIO DE EDICIÓN. Al hacer click en el botón Guardar, llama a esta misma página (form action="edit.php"): edit.php
+Esta misma página (edit.php), además de editar el formulario, se encargará de proceder a la modificación del registro correspondiente en la tabla de empleados.
+-->
         <form action="edit_action.php" method="post" class="border p-4 rounded bg-light">
             <div class="mb-3">
                 <label for="nombre_autor" class="form-label">Nombre Autor</label>
-                <input type="text" class="form-control" name="nombre_autor" id="nombre_autor" value="<?php echo htmlspecialchars($fila['nombre_autor']); ?>" required>
+                <input type="text" class="form-control" name="nombre_autor" id="nombre_autor" value="<?php echo $deporte;?>" required>
             </div>
 
             <div class="mb-3">
                 <label for="apellido_autor" class="form-label">Apellido Autor</label>
-                <input type="text" class="form-control" name="apellido_autor" id="apellido_autor" value="<?php echo htmlspecialchars($fila['apellido_autor']); ?>" required>
+                <input type="text" class="form-control" name="apellido_autor" id="apellido_autor" value="<?php echo $deporte;?>" required>
             </div>
 
+            <div class="col-md-6">
+			<label for="deporte" class="form-label">Deporte</label>
+            <select name="deporte" id="deporte" class="form-control" placeholder="Deporte" required>
+                <option value="<?php echo $deporte;?>" selected><?php echo $deporte;?></option>
+				<option value="Fútbol">Fútbol</option>
+				<option value="Baloncesto">Baloncesto</option>
+				<option value="Petanca">Petanca</option>
+				<option value="Ciclismo">Ciclismo</option>
+				<option value="Rugby">Rugby</option>
+				<option value="Atletismo">Atletismo</option>
+				<option value="Waterpolo">Waterpolo</option>
+            </select>    
+		    </div>
+
             <div class="mb-3">
-                <label for="deporte" class="form-label">Deporte</label>
-                <input type="text" class="form-control" name="deporte" id="deporte" value="<?php echo htmlspecialchars($fila['deporte']); ?>" required>
+                <label for="antiguedad" class="form-label">Antiguedad</label>
+                <input type="number" class="form-control" name="antiguedad" id="antiguedad" value="<?php echo $deporte;?>" required>
             </div>
 
             <div class="mb-3">
                 <label for="fecha_publicacion" class="form-label">Fecha de Publicación</label>
-                <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" value="<?php echo htmlspecialchars($fila['fecha_publicacion']); ?>" required>
+                <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" value="<?php echo $deporte;?>" required>
             </div>
 
             <input type="hidden" name="articulo_id" value="<?php echo $articulo_id; ?>">

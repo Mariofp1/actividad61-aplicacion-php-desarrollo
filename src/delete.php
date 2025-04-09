@@ -36,6 +36,8 @@ include("config.php");
             } else {
                 echo "<div class='alert alert-danger'>Error: No se proporcionó un ID válido.</div>";
             }
+//Se redirige a la página principal: index.php
+//header("Location:index.php");
             ?>
             <a href="index.php" class="btn btn-primary mt-3">Ver lista de artículos</a>
         </div>
