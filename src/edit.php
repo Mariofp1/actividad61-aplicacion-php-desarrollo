@@ -33,7 +33,7 @@ include_once("config.php");
 /*Obtiene el id del registro del empleado a modificar, idempleado, a partir de su URL. Este tipo de datos se accede utilizando el método: GET*/
 
 //Recoge el id del empleado a modificar a través de la clave idempleado del array asociativo $_GET y lo almacena en la variable idempleado
-        $articulo_id = $mysqli->real_escape_string($_GET['id']);
+        $articulo_id = $_GET['id'];
 //Con mysqli_real_scape_string protege caracteres especiales en una cadena para ser usada en una sentencia SQL.
         $articulo_id = $mysqli->real_escape_string($articulo_id);
 //Se selecciona el registro a modificar: select
@@ -41,8 +41,13 @@ include_once("config.php");
 //Se extrae el registro y lo guarda en el array $fila
 //Nota: También se puede utilizar el método fetch_assoc de la siguiente manera: $fila = $resultado->fetch_assoc();
         $fila = $resultado->fetch_array();
+        $nombre_autor = $fila['nombre_autor'];
+        $apellido_autor = $fila['apellido_autor'];
+        $deporte = $fila['deporte'];
+        $antiguedad = $fila['antiguedad'];
+        $fecha_publicacion = $fila['fecha_publicacion'];
 //Se cierra la conexión de base de datos
-        $mysqli->close();
+        $mysqli->close();   
         ?>
 <!--FORMULARIO DE EDICIÓN. Al hacer click en el botón Guardar, llama a esta misma página (form action="edit.php"): edit.php
 Esta misma página (edit.php), además de editar el formulario, se encargará de proceder a la modificación del registro correspondiente en la tabla de empleados.
@@ -50,12 +55,12 @@ Esta misma página (edit.php), además de editar el formulario, se encargará de
         <form action="edit_action.php" method="post" class="border p-4 rounded bg-light">
             <div class="mb-3">
                 <label for="nombre_autor" class="form-label">Nombre Autor</label>
-                <input type="text" class="form-control" name="nombre_autor" id="nombre_autor" value="<?php echo $deporte;?>" required>
+                <input type="text" class="form-control" name="nombre_autor" id="nombre_autor" value="<?php echo $nombre_autor;?>" required>
             </div>
 
             <div class="mb-3">
                 <label for="apellido_autor" class="form-label">Apellido Autor</label>
-                <input type="text" class="form-control" name="apellido_autor" id="apellido_autor" value="<?php echo $deporte;?>" required>
+                <input type="text" class="form-control" name="apellido_autor" id="apellido_autor" value="<?php echo $apellido_autor;?>" required>
             </div>
 
             <div class="col-md-6">
@@ -74,12 +79,12 @@ Esta misma página (edit.php), además de editar el formulario, se encargará de
 
             <div class="mb-3">
                 <label for="antiguedad" class="form-label">Antiguedad</label>
-                <input type="number" class="form-control" name="antiguedad" id="antiguedad" value="<?php echo $deporte;?>" required>
+                <input type="number" class="form-control" name="antiguedad" id="antiguedad" value="<?php echo $antiguedad;?>" required>
             </div>
 
             <div class="mb-3">
                 <label for="fecha_publicacion" class="form-label">Fecha de Publicación</label>
-                <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" value="<?php echo $deporte;?>" required>
+                <input type="date" class="form-control" name="fecha_publicacion" id="fecha_publicacion" value="<?php echo $fecha_publicacion;?>" required>
             </div>
 
             <input type="hidden" name="articulo_id" value="<?php echo $articulo_id; ?>">
