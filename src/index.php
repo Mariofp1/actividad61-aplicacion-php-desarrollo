@@ -19,7 +19,7 @@ include_once("config.php");
 <body class="container py-4">
 <div class="card p-4 shadow-sm">
     <header class="text-center mb-4">
-        <h1 class="text-primary">Revusta de deportes</h1>
+        <h1 class="text-primary">Sport Magazines</h1>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
